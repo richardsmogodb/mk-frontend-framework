@@ -24,7 +24,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:richardsmogodb/mk-frontend-framework.git',
       path : '/var/www/production',
-      'post-deploy' : 'npm install && pm2 startOrRestart ecosystem.config.js --env production',
+      'post-deploy' : 'cnpm install && pm2 startOrRestart ecosystem.config.js --env production',
       env  : {
         "NODE_ENV":"production"
       }
