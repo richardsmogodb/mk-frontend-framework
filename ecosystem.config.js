@@ -24,7 +24,7 @@ module.exports = {
       repo : 'git@github.com:richardsmogodb/mk-frontend-framework.git',
       path : '/var/www/production',
       ssh_options : 'StrictHostKeyChecking=no',
-      'post-deploy' : 'node -v && npm -v && cnpm -v && rm -rf node_modules && cnpm install && npm run build && pm2 startOrReload ecosystem.config.js --env production',
+      'post-deploy' : 'nvm use v12.0.0 && node -v && npm -v && cnpm -v && rm -rf node_modules && cnpm install && npm run build && pm2 startOrReload ecosystem.config.js --env production',
       env  : {
         "NODE_ENV":"production"
       }
