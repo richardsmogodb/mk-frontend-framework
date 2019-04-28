@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'mk-frontend-framework',
-    script: 'server/index.js',
+    script: 'npm start',
     instances: 1,
     autorestart: true,
     watch: true,
