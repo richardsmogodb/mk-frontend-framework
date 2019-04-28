@@ -2,6 +2,7 @@ module.exports = {
   apps : [{
     name: 'mk-frontend-framework',
     script: 'npm start',
+    cwd: '/var/www/production/current',
     instances: 1,
     autorestart: true,
     watch: true,
