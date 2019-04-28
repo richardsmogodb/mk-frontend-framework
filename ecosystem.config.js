@@ -1,8 +1,7 @@
 module.exports = {
   apps : [{
     name: 'mk-frontend-framework',
-    script: 'npm start',
-    cwd: '/var/www/production/',
+    script: 'server/index.js',
     instances: 1,
     autorestart: true,
     watch: true,
@@ -25,7 +24,7 @@ module.exports = {
       repo : 'git@github.com:richardsmogodb/mk-frontend-framework.git',
       path : '/var/www/production',
       ssh_options : 'StrictHostKeyChecking=no',
-      'post-deploy' : 'npm install && npm start && pm2 startOrRestart ecosystem.config.js --env production',
+      'post-deploy' : 'rm -rf node_modules && cnpm install && npm run build && pm2 startOrReload ecosystem.config.js --env production',
       env  : {
         "NODE_ENV":"production"
       }
