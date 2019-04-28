@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'mk-frontend-framework',
-    script: './node_modules/nuxt/bin/nuxt',
+    script: 'server/index.js',
     instances: 1,
     autorestart: true,
     watch: true,
