@@ -1,8 +1,7 @@
 module.exports = {
   apps : [{
     name: 'mk-frontend-framework',
-    script: './node_modules/nuxt-start/bin/nuxt-start.js',
-    cwd: '/var/www/production/current',
+    script: './node_modules/nuxt/bin/nuxt-start',
     instances: 1,
     autorestart: true,
     watch: true,
