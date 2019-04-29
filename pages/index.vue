@@ -25,9 +25,8 @@ export default {
     }),
   },
   asyncData(context) {
-    console.log(context);
     return {
-      title: '卖客web前端框架',
+      title: '卖客web前端框架start',
       desc: '使用nuxt服务器渲染vue',
     };
   },
