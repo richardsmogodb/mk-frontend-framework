@@ -8,6 +8,14 @@ module.exports = {
   mode: 'universal',
 
   /*
+  ** 服务配置
+  */
+  server: {
+    host: '0.0.0.0',
+    port: 3000
+  },
+
+  /*
   ** 页面默认head配置，可在页面组件中覆盖
   */
   head: {
