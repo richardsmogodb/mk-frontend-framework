@@ -1,24 +1,15 @@
 <template>
-  <section class="container">
-    <div>
-      <logo />
-      <h1 class="title" v-text="title"></h1>
-      <p v-text="counter"></p>
-      <h2 class="subtitle" v-text="desc"></h2>
-      <nuxt-link to="/example">
-        <a-button @click="add">开始</a-button>
-      </nuxt-link>
+  <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'auto' }">
+    <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
+      <p v-for="n in 30" :key="n" v-text="n"></p>
     </div>
-  </section>
+  </a-layout-content>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
 export default {
-  components: {
-    Logo: () => import('@/components/Logo'),
-  },
   computed: {
     ...mapGetters({
       counter: 'example/counter',
@@ -39,15 +30,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  > div {
-    .flex-box(column; center; center);
-    color: @_theme_color;
-  }
+p {
+  text-align: center;
 }
 </style>
