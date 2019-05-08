@@ -3,32 +3,24 @@
     class="side-bar"
     breakpoint="lg"
     collapsed-width="0"
+    width="130"
     @collapse="onCollapse"
     @breakpoint="onBreakpoint"
   >
-    <div class="logo" />
-    <a-menu theme="dark" mode="inline">
-      <a-menu-item key="1">
-        <a-icon type="user" />
-        <span class="nav-text">nav 1</span>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <a-icon type="video-camera" />
-        <span class="nav-text">nav 2</span>
-      </a-menu-item>
-      <a-menu-item key="3">
-        <a-icon type="upload" />
-        <span class="nav-text">nav 3</span>
-      </a-menu-item>
-      <a-menu-item key="4">
-        <a-icon type="user" />
-        <span class="nav-text">nav 4</span>
-      </a-menu-item>
-      <a-menu-item v-for="n in 20" :key="n + 5">
-        <a-icon type="user" />
-        <span class="nav-text">nav 4</span>
-      </a-menu-item>
-    </a-menu>
+    <div class="side-bar-inner">
+      <div class="top"></div>
+      <div class="center">
+        <a-icon
+          type="left"
+          :style="{ fontSize: '50px', color: 'white', cursor: 'pointer' }"
+        />
+      </div>
+      <div class="bottom">
+        <a-button icon="qq" ghost block>QQ咨询</a-button>
+        <a-button icon="wechat" ghost block>微信咨询</a-button>
+        <p><a-icon type="phone" />&nbsp;028-83231924</p>
+      </div>
+    </div>
   </a-layout-sider>
 </template>
 
@@ -47,12 +39,29 @@ export default {
 
 <style lang="less" scoped>
 .side-bar {
-  height: 100vh;
-  overflow: auto;
-  .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px;
+  background: #4c4c4c;
+  .side-bar-inner {
+    .flex-box(column);
+    height: 100%;
+    padding: 15px;
+    > div {
+      width: 100%;
+    }
+    .top,
+    .bottom {
+      flex-basis: 200px;
+      text-align: center;
+      font-size: @_theme_font_size_small;
+      color: @_theme_font_color;
+      button {
+        margin-bottom: 24px;
+        font-size: @_theme_font_size_small;
+      }
+    }
+    .center {
+      .flex-box(column, center, center);
+      flex: 1;
+    }
   }
 }
 </style>

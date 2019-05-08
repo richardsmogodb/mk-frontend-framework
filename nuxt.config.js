@@ -39,7 +39,8 @@ module.exports = {
   ** 全局css
   */
   css: [
-    'ant-design-vue/dist/antd.less'
+    'ant-design-vue/dist/antd.less',
+    '@/assets/less/global.less'
   ],
 
   /*
@@ -85,7 +86,7 @@ module.exports = {
     /*
     ** 分析依赖优化
     */
-    analyze: true,
+    analyze: false,
 
     /*
     ** 优化CSS
@@ -98,7 +99,7 @@ module.exports = {
     loaders: {
       less: {
         modifyVars: {
-          'primary-color': '#08b620'
+          'primary-color': '#ffc107'
         },
         javascriptEnabled: true
       }

@@ -20,7 +20,7 @@ module.exports = {
       user : 'root',
       host : '47.107.150.160',
       port : '22',
-      ref  : 'origin/master',
+      ref  : 'origin/ui',
       repo : 'git@github.com:richardsmogodb/mk-frontend-framework.git',
       path : '/var/www/production',
       ssh_options : 'StrictHostKeyChecking=no',
