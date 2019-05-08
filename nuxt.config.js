@@ -85,7 +85,7 @@ module.exports = {
     /*
     ** 分析依赖优化
     */
-    analyze: false,
+    analyze: true,
 
     /*
     ** 优化CSS
