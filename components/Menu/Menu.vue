@@ -1,6 +1,6 @@
 <template>
   <circle :class="{ 'full-screen': active }">
-    <switch @click="active = !active">
+    <switch @click="switchActive">
       菜单
       <a-icon type="bars" />
     </switch>
@@ -13,6 +13,12 @@ export default {
     return {
       active: false,
     };
+  },
+  methods: {
+    switchActive() {
+      this.active = !this.active;
+      this.$emit('switchActive', this.active);
+    },
   },
 };
 </script>
@@ -30,7 +36,7 @@ circle {
   border-bottom-left-radius: 100%;
   font-size: @_theme_font_size_larger;
   color: white;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  .theme-transition;
   &.full-screen {
     width: ~'calc(100% - @{circle-default-width})';
     height: 100%;

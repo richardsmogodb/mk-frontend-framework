@@ -1,15 +1,25 @@
 <template>
-  <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'auto' }">
-    <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      <p v-for="n in 100" :key="n" v-text="n"></p>
-    </div>
-  </a-layout-content>
+  <a-layout>
+    <a-layout-content :style="{ overflow: 'hidden' }">
+      <Top></Top>
+      <Progress :step="step" />
+    </a-layout-content>
+  </a-layout>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
 export default {
+  components: {
+    Progress: () => import('@/components/Guide/Progress'),
+    Top: () => import('@/components/Guide/Top'),
+  },
+  data() {
+    return {
+      step: 0,
+    };
+  },
   computed: {
     ...mapGetters({
       counter: 'example/counter',
