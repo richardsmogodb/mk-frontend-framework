@@ -22,7 +22,7 @@ module.exports = {
       port : '22',
       ref  : 'origin/ui',
       repo : 'git@github.com:richardsmogodb/mk-frontend-framework.git',
-      path : '/var/www/production',
+      path : '/var/www/ui',
       ssh_options : 'StrictHostKeyChecking=no',
       'post-deploy' : 'npm run build && pm2 startOrReload ecosystem.config.js --env production',
       env  : {
