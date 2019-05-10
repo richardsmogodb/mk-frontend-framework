@@ -5,10 +5,15 @@ import Icon from 'ant-design-vue/lib/icon';
 import Button from 'ant-design-vue/lib/button';
 import LocaleProvider from 'ant-design-vue/lib/locale-provider';
 
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/font_1185072_x302wbhs9gf.js',
+});
+
 export default () => {
   // Vue.use(Antd);
   Vue.use(Layout);
   Vue.use(Icon);
   Vue.use(Button);
   Vue.use(LocaleProvider);
+  Vue.component('icon-font', IconFont);
 };

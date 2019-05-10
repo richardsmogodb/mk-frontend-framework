@@ -2,7 +2,7 @@
   <circle :class="{ 'full-screen': active }">
     <switch @click="switchActive">
       菜单
-      <a-icon type="bars" />
+      <icon-font :type="active ? 'iconclose' : 'iconmenu'" />
     </switch>
   </circle>
 </template>
@@ -29,13 +29,11 @@ circle {
   position: absolute;
   top: 0;
   right: 0;
-  display: block;
   width: @circle-default-width;
   height: @circle-default-width;
   background: @_theme_color;
   border-bottom-left-radius: 100%;
-  font-size: @_theme_font_size_larger;
-  color: white;
+  z-index: 3;
   .theme-transition;
   &.full-screen {
     width: ~'calc(100% - @{circle-default-width})';
@@ -49,11 +47,16 @@ circle {
     display: block;
     width: @circle-default-width;
     height: @circle-default-width;
-    line-height: @circle-default-width * 3 / 4;
     text-align: center;
     cursor: pointer;
+    color: white;
+    font-size: 15px;
+    .flex-box(row, center, center);
+    padding: 0 0 20px 20px;
     > .anticon {
-      font-size: @_theme_font_size_larger + 2;
+      vertical-align: top;
+      font-size: 26px;
+      padding: 0 5px;
     }
   }
 }

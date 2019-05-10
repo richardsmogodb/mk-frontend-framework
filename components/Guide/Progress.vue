@@ -13,15 +13,14 @@
 <script>
 export default {
   props: {
+    progresses: {
+      type: Array,
+      default: () => [],
+    },
     step: {
       type: Number,
       default: 0,
     },
-  },
-  data() {
-    return {
-      progresses: ['TOP', 'CASE', 'CUSTOMER', 'FOOTER'],
-    };
   },
 };
 </script>
@@ -32,6 +31,7 @@ ul {
   top: 50vh;
   left: 40px;
   transform: translateY(-50%);
+  z-index: 2;
   > li {
     position: relative;
     &:before {
