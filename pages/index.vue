@@ -2,7 +2,12 @@
   <a-layout>
     <a-layout-content>
       <div class="content-scroll">
-        <div :style="{ transform: `translateY(${-step * 100}vh)` }">
+        <div
+          :style="{ transform: `translateY(${-step * 100}vh)` }"
+          @touchstart="touchstart"
+          @touchmove="touchmove"
+          @touchend="touchend"
+        >
           <Top />
           <Case />
         </div>
@@ -27,6 +32,10 @@ export default {
     return {
       progresses: ['TOP', 'CASE', 'CUSTOMER', 'FOOTER'],
       step: 0,
+      touch: {
+        x: 0,
+        y: 0,
+      },
     };
   },
   computed: {
@@ -44,6 +53,34 @@ export default {
     this.addScrollEvent();
   },
   methods: {
+    touchstart({ touches }) {
+      if (!touches) {
+        return;
+      }
+      const { pageX, pageY } = touches[0];
+      this.touch.x = pageX;
+      this.touch.y = pageY;
+    },
+    touchmove({ touches, view }) {
+      if (!touches && !view) {
+        return;
+      }
+      const { pageY } = touches[0];
+      const {
+        screen: { height },
+      } = view;
+      this.step -= (pageY - this.touch.y) / (height * 10);
+    },
+    touchend() {
+      const step = Number(this.step.toFixed(0));
+      if (step > this.progresses.length - 1) {
+        this.step = this.progresses.length - 1;
+      } else if (step < 0) {
+        this.step = 0;
+      } else {
+        this.step = step;
+      }
+    },
     addScrollEvent() {
       const scrollFn = event => {
         const e = event || window.event;
