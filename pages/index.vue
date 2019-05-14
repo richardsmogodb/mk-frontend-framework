@@ -3,7 +3,10 @@
     <a-layout-content>
       <div class="content-scroll">
         <div
-          :style="{ transform: `translateY(${-step * 100}vh)` }"
+          :style="{
+            transform: `translateY(${-step * 100}vh)`,
+            height: `${progresses.length * 100}vh`,
+          }"
           @touchstart="touchstart"
           @touchmove="touchmove"
           @touchend="touchend"
@@ -35,6 +38,7 @@ export default {
       touch: {
         x: 0,
         y: 0,
+        direction: 'none',
       },
     };
   },
@@ -61,25 +65,29 @@ export default {
       this.touch.x = pageX;
       this.touch.y = pageY;
     },
-    touchmove({ touches, view }) {
-      if (!touches && !view) {
+    touchmove({ touches }) {
+      if (!touches) {
         return;
       }
       const { pageY } = touches[0];
-      const {
-        screen: { height },
-      } = view;
-      this.step -= (pageY - this.touch.y) / (height * 10);
+      if (pageY < this.touch.y) {
+        this.touch.direction = 'down';
+      } else if (pageY > this.touch.y) {
+        this.touch.direction = 'up';
+      } else {
+        this.touch.direction = 'none';
+      }
     },
     touchend() {
-      const step = Number(this.step.toFixed(0));
-      if (step > this.progresses.length - 1) {
-        this.step = this.progresses.length - 1;
-      } else if (step < 0) {
-        this.step = 0;
-      } else {
-        this.step = step;
-      }
+      const filter = {
+        up: () => {
+          if (this.step > 0) this.step -= 1;
+        },
+        down: () => {
+          if (this.step < this.progresses.length - 1) this.step += 1;
+        },
+      };
+      filter[this.touch.direction] && filter[this.touch.direction]();
     },
     addScrollEvent() {
       const scrollFn = event => {
@@ -125,6 +133,7 @@ export default {
 
 <style lang="less" scoped>
 .content-scroll {
+  position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;

@@ -25,18 +25,18 @@ export default {};
   .flex-box(column, center, center);
   .introduce {
     h2 {
-      font-size: 40px;
+      font-size: 3rem;
     }
     p {
       position: relative;
-      font-size: 32px;
+      font-size: 2rem;
       &:after {
         position: absolute;
-        top: calc(100% + 16px);
+        top: calc(100% + 1rem);
         left: 0;
         content: '';
-        width: 40px;
-        height: 5px;
+        width: 3rem;
+        height: 0.4rem;
         background: black;
       }
     }
