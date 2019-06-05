@@ -25,7 +25,6 @@ export default ({ $axios, store, redirect }) => {
     if (tokenInStore) {
       config.headers.authToken = tokenInStore;
     }
-    return config;
   });
   /*
    ** 请求返回处理逻辑
