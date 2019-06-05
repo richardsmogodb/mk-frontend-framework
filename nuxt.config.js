@@ -33,7 +33,10 @@ module.exports = {
   /*
   ** 定制进度条颜色
   */
-  loading: { color: '#fff' },
+  loading: {
+    color: '#08b620',
+    height: '5px'
+  },
 
   /*
   ** 全局css
@@ -65,6 +68,24 @@ module.exports = {
   */
   axios: {
     // 文档: https://github.com/nuxt-community/axios-module#options
+    debug: true,
+    proxy: true,
+    prefix: '/api/',
+    retry: { retries: 3 },
+  },
+
+  /*
+  ** 代理配置
+  */
+  proxy: {
+    '/api/': { target: 'http://10.188.57.114:8060', pathRewrite: { '^/api/': '/' } }
+  },
+
+  /*
+  ** 全局路由设置
+  */
+  router: {
+    middleware: 'check-auth'
   },
 
   /*
@@ -85,7 +106,7 @@ module.exports = {
     /*
     ** 分析依赖优化
     */
-    analyze: true,
+    analyze: false,
 
     /*
     ** 优化CSS

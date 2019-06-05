@@ -5,7 +5,7 @@
       <a-layout-header :style="{ background: '#fff', padding: 0 }" />
       <nuxt />
       <a-layout-footer style="textAlign: center">
-        Ant Design ©2018 Created by Ant UED
+        Copyright © 2013-2016 杭州卖客网络科技有限公司 卖客星球
       </a-layout-footer>
     </a-layout>
   </a-layout>

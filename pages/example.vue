@@ -3,7 +3,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  asyncData() {
+    console.log(123);
+  },
+};
 </script>
 
 <style lang="less" scoped></style>
