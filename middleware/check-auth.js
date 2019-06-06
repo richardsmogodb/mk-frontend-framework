@@ -1,30 +1,17 @@
 import { SET_TOKEN } from '@/store/auth';
-import {
-  loginUrl,
-  setTokenForLocalStorage,
-  getTokenFromLocalStorage,
-} from '@/utils/auth';
+import { COOKIE_TOKEN_KEY } from '@/utils/auth';
 
-export default async ({ store, query, redirect }) => {
+export default async ({ store, query, redirect, req }) => {
   if (process.server) {
-    if (query.ticket) {
-      try {
-        await store.dispatch('auth/getTokenByTicket', query.ticket);
-      } catch (err) {
-        console.error(err);
-      }
+    const tokenInCookie = req.ctx.cookies.get(COOKIE_TOKEN_KEY);
+    if (tokenInCookie) {
+      store.commit(`auth/${SET_TOKEN}`, tokenInCookie);
+    } else if (query.ticket) {
+      const newCookie = await store.dispatch(
+        'auth/getTokenByTicket',
+        query.ticket
+      );
+      req.ctx.cookies.set(COOKIE_TOKEN_KEY, newCookie, { httpOnly: false });
     }
-    return;
-  }
-  const tokenInStore = store.getters['auth/token'];
-  const tokenInLocalStorage = getTokenFromLocalStorage();
-  if (tokenInStore) {
-    if (!tokenInLocalStorage) {
-      setTokenForLocalStorage(tokenInStore);
-    }
-  } else if (tokenInLocalStorage) {
-    store.commit(SET_TOKEN, tokenInLocalStorage);
-  } else {
-    redirect(loginUrl);
   }
 };

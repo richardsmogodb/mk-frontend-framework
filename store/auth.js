@@ -15,6 +15,7 @@ export const actions = {
       const { code, result } = data;
       if (code === 0) {
         commit(SET_TOKEN, result);
+        return result;
       }
     } catch (err) {
       throw err;

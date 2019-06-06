@@ -1,7 +1,7 @@
 import api from '@/utils/api';
-import { loginUrl, removeTokenFromLocalStorage } from '@/utils/auth';
+import { LOGIN_URL, COOKIE_TOKEN_KEY } from '@/utils/auth';
 
-export default ({ $axios, store, redirect }) => {
+export default ({ $axios, store, redirect, req }) => {
   /*
    ** 拓展业务请求
    */
@@ -29,9 +29,7 @@ export default ({ $axios, store, redirect }) => {
   /*
    ** 请求返回处理逻辑
    */
-  $axios.onResponse(response => {
-    // console.log(response.data);
-  });
+  $axios.onResponse(response => {});
   /*
    ** 请求错误处理逻辑
    */
@@ -42,8 +40,12 @@ export default ({ $axios, store, redirect }) => {
         redirect('/400');
         break;
       case 401:
-        if (!process.server) removeTokenFromLocalStorage();
-        redirect(loginUrl);
+        if (process.server) {
+          req.ctx.cookies.set(COOKIE_TOKEN_KEY, null);
+        } else {
+          document.cookie = `${COOKIE_TOKEN_KEY}=`;
+        }
+        redirect(LOGIN_URL);
         break;
     }
   });

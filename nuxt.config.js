@@ -68,8 +68,9 @@ module.exports = {
   */
   axios: {
     // 文档: https://github.com/nuxt-community/axios-module#options
-    debug: true,
+    debug: false,
     proxy: true,
+    credentials: true,
     prefix: '/api/',
     retry: { retries: 3 },
   },
@@ -78,7 +79,7 @@ module.exports = {
   ** 代理配置
   */
   proxy: {
-    '/api/': { target: 'http://ukx3vq.natappfree.cc', pathRewrite: { '^/api/': '/' } }
+    '/api/': { target: 'http://y7ysyd.natappfree.cc', pathRewrite: { '^/api/': '/' } }
   },
 
   /*
