@@ -78,7 +78,7 @@ module.exports = {
   ** 代理配置
   */
   proxy: {
-    '/api/': { target: 'http://10.188.57.114:8060', pathRewrite: { '^/api/': '/' } }
+    '/api/': { target: 'http://ukx3vq.natappfree.cc', pathRewrite: { '^/api/': '/' } }
   },
 
   /*

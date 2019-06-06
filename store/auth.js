@@ -10,10 +10,14 @@ export const getters = {
 
 export const actions = {
   async getTokenByTicket({ commit }, ticket) {
-    const { data } = await this.$axios._auth(ticket);
-    const { code, result } = data;
-    if (code === 0) {
-      commit(SET_TOKEN, result);
+    try {
+      const { data } = await this.$axios._auth(ticket);
+      const { code, result } = data;
+      if (code === 0) {
+        commit(SET_TOKEN, result);
+      }
+    } catch (err) {
+      throw err;
     }
   },
 };
