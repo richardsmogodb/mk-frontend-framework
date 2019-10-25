@@ -1,11 +1,16 @@
 <template>
-  <section>example</section>
+  <section @click="abc">example</section>
 </template>
 
 <script>
 export default {
-  asyncData() {
-    console.log(123);
+  asyncData({ app }) {
+    console.log(app);
+  },
+  methods: {
+    abc() {
+      console.log(this.$api);
+    },
   },
 };
 </script>

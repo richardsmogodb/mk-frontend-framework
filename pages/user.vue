@@ -1,13 +1,12 @@
 <template>
   <a-layout-content :style="{ margin: '24px 16px 0', overflow: 'auto' }">
-    <div :style="{ padding: '24px', background: '#fff' }">
+    <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
       <p
         v-for="item in list"
         :key="item.uid"
-        @click="jump(item.uid)"
+        @click="$router.push(`/account/${item.uid}`)"
         v-text="item.userName"
       ></p>
-      <p @click="$router.push('/example')">To example</p>
     </div>
   </a-layout-content>
 </template>
@@ -16,30 +15,18 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  data() {
-    return {
-      list: [],
-    };
-  },
   computed: {
     ...mapGetters({
       counter: 'example/counter',
     }),
   },
   async asyncData({ app }) {
-    try {
-      const { data } = await app.$api._getAccounts();
-      return { list: data.result || [] };
-    } catch (err) {
-      return { list: [] };
-    }
+    const { data } = await app.$api._getAccounts();
+    return { list: data.result || [] };
   },
   methods: {
     add() {
       this.$store.dispatch('example/incrementAsync');
-    },
-    jump(uid) {
-      this.$router.push(`/account/${uid}`);
     },
   },
 };

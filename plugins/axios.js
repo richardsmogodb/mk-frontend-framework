@@ -1,22 +1,6 @@
-import api from '@/utils/api';
 import { LOGIN_URL, COOKIE_TOKEN_KEY } from '@/utils/auth';
 
 export default ({ $axios, store, redirect, req }) => {
-  /*
-   ** 拓展业务请求
-   */
-  Object.keys(api).forEach(key => {
-    const method = key.split('_')[0].toLowerCase();
-    const name = `_${key.split('_')[1]}`;
-    const url = api[key];
-    if (typeof url === 'function') {
-      $axios[name] = (query, params) => {
-        return $axios[method](url(query), (params = {}));
-      };
-    } else {
-      $axios[name] = params => $axios[method](url, (params = {}));
-    }
-  });
   /*
    ** 客户端请求携带token
    */
@@ -26,6 +10,7 @@ export default ({ $axios, store, redirect, req }) => {
       config.headers.authToken = tokenInStore;
     }
   });
+
   /*
    ** 请求返回处理逻辑
    */

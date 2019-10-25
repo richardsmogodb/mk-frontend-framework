@@ -7,11 +7,18 @@
     @breakpoint="onBreakpoint"
   >
     <div class="logo" />
-    <a-menu theme="dark" mode="inline">
-      <a-menu-item v-for="n in 20" :key="n">
-        <a-icon :type="getRandomIcon()" />
-        <span class="nav-text">nav {{ n }}</span>
-      </a-menu-item>
+    <a-menu
+      theme="dark"
+      mode="inline"
+      :default-selected-keys="[menus[0].key]"
+      @click="onMenuClick"
+    >
+      <template v-for="menu in menus">
+        <a-menu-item :key="menu.key">
+          <icon-font :type="menu.icon" />
+          <span class="nav-text" v-text="menu.title" />
+        </a-menu-item>
+      </template>
     </a-menu>
   </a-layout-sider>
 </template>
@@ -20,7 +27,18 @@
 export default {
   data() {
     return {
-      icons: ['user', 'video-camera', 'upload'],
+      menus: [
+        {
+          key: 'index',
+          icon: 'iconkanban',
+          title: '实时看板',
+        },
+        {
+          key: 'user',
+          icon: 'iconliuliang',
+          title: '流量分析',
+        },
+      ],
     };
   },
   methods: {
@@ -30,8 +48,10 @@ export default {
     onBreakpoint(broken) {
       console.log(broken);
     },
-    getRandomIcon() {
-      return this.icons[(Math.random() * this.icons.length) | 0];
+    onMenuClick({ key }) {
+      if (key === this.$route.name) return;
+
+      this.$router.push({ name: key });
     },
   },
 };

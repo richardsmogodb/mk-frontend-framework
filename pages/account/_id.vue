@@ -7,8 +7,9 @@
 
 <script>
 export default {
-  async asyncData({ params, $axios }) {
-    const { data } = await $axios._getAccount(params.id);
+  async asyncData({ params, app }) {
+    const { data } = await app.$api._getAccount(params.id);
+
     return { account: data.result || {} };
   },
   validate({ params }) {

@@ -1,4 +1,4 @@
-const pkg = require('./package')
+const pkg = require('./package');
 
 
 module.exports = { 
@@ -12,7 +12,7 @@ module.exports = {
   */
   server: {
     host: '0.0.0.0',
-    port: 3000
+    port: 4000
   },
 
   /*
@@ -34,7 +34,7 @@ module.exports = {
   ** 定制进度条颜色
   */
   loading: {
-    color: '#08b620',
+    color: '#1890ff',
     height: '5px'
   },
 
@@ -50,6 +50,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/antd-ui',
+    '@/plugins/api',
     '@/plugins/axios'
   ],
 
@@ -59,7 +60,6 @@ module.exports = {
   modules: [
     // 文档: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@nuxtjs/style-resources'
   ],
 
@@ -71,7 +71,7 @@ module.exports = {
     debug: false,
     proxy: true,
     credentials: true,
-    prefix: '/api/',
+    // prefix: '/api/',
     retry: { retries: 3 },
   },
 
@@ -79,7 +79,7 @@ module.exports = {
   ** 代理配置
   */
   proxy: {
-    '/api/': { target: 'http://y7ysyd.natappfree.cc', pathRewrite: { '^/api/': '/' } }
+    '/api/': { target: 'http://127.0.0.1:3000', pathRewrite: { '^/api/': '/' } }
   },
 
   /*
@@ -113,15 +113,15 @@ module.exports = {
     ** 优化CSS
     */
     optimizeCSS: true,
-
+    // extractCSS: true,
     /*
     ** 加载器配置
     */
     loaders: {
       less: {
-        modifyVars: {
-          'primary-color': '#08b620'
-        },
+        // modifyVars: {
+        //   'primary-color': '#08b620'
+        // },
         javascriptEnabled: true
       }
     },

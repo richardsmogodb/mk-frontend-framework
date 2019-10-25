@@ -1,6 +1,9 @@
 const Koa = require('koa')
 const consola = require('consola')
+const bodyParser = require('koa-bodyparser');
 const { Nuxt, Builder } = require('nuxt')
+
+const { router, api } = require('./api');
 
 const app = new Koa()
 
@@ -11,7 +14,6 @@ config.dev = !(app.env === 'production')
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)
-
   const {
     host = process.env.HOST || '127.0.0.1',
     port = process.env.PORT || 3000
@@ -25,7 +27,12 @@ async function start() {
     await nuxt.ready()
   }
 
+  app.use(bodyParser());
+  app.use(router.routes());
+  app.use(router.allowedMethods());
+
   app.use(ctx => {
+    ctx.state.api = api;
     ctx.status = 200
     ctx.respond = false // Bypass Koa's built-in response handling
     ctx.req.ctx = ctx // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
